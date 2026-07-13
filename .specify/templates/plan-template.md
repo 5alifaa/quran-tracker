@@ -12,26 +12,35 @@
 ## Technical Context
 
 <!--
-  ACTION REQUIRED: Replace the content in this section with the technical details
-  for the project. The structure here is presented in advisory capacity to guide
-  the iteration process.
+  ACTION REQUIRED: Replace the content in this section with concrete technical details.
+  The Quran Tracker MVP is governed by the constitution: mobile-first, Arabic-first,
+  zero-backend, performance-first, accessible, and single-page.
 -->
 
-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
-**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
-**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
-**Project Type**: [e.g., library/cli/web-service/mobile-app/compiler/desktop-app or NEEDS CLARIFICATION]  
-**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
-**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
-**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
+**Language/Version**: [e.g., TypeScript strict mode / NEEDS CLARIFICATION]  
+**Primary Dependencies**: [approved dependencies only; no new external libraries without approval]  
+**Storage**: [local device storage only for MVP, or N/A]  
+**Testing**: [manual MVP verification and build validation unless tests are explicitly requested]  
+**Target Platform**: [mobile web first; tablet and desktop responsive support]  
+**Project Type**: [single-page web app]  
+**Performance Goals**: [e.g., first paint under 3 seconds on 3G-class connection]  
+**Constraints**: [Arabic RTL UI, Arabic numerals, no backend/API/auth/analytics, SVG graphics only, light cream theme]  
+**Scale/Scope**: [one reader per device for MVP; no cross-device sync]
 
 ## Constitution Check
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+- **Mobile-first**: Plan starts with small-screen layout, 44px minimum touch targets, and no horizontal scrolling.
+- **Arabic-first RTL**: Plan covers Arabic-only UI text, RTL-native layout, Arabic numerals, and Islamic heading typography.
+- **Spiritual tone**: Plan uses encouraging Arabic copy and avoids guilt, punishment, streak pressure, or transactional language.
+- **Zero backend MVP**: Plan avoids auth, databases, analytics, tracking, application API calls, and any reader data leaving the device.
+- **Performance over features**: Plan preserves single-page flow, minimal dependencies, SVG-only graphics, and <3s first paint on 3G-class connection.
+- **Accessibility**: Plan includes semantic HTML, screen reader labels, visible focus states, keyboard access, and WCAG 2.1 AA contrast.
+- **Code constraints**: Plan uses strict TypeScript, Tailwind utilities, shadcn/ui bases where useful, small components, and Arabic comments for non-obvious business logic.
+- **Manual verification**: Plan includes iPhone Safari, Android Chrome, Desktop Chrome, local persistence, RTL, fonts, offline return, accessibility basics, and `next build`.
+
+If any gate cannot pass, document the violation in Complexity Tracking before Phase 0 proceeds.
 
 ## Project Structure
 
@@ -43,62 +52,31 @@ specs/[###-feature]/
 ├── research.md          # Phase 0 output (/speckit.plan command)
 ├── data-model.md        # Phase 1 output (/speckit.plan command)
 ├── quickstart.md        # Phase 1 output (/speckit.plan command)
-├── contracts/           # Phase 1 output (/speckit.plan command)
+├── contracts/           # Phase 1 output only if contracts are needed
 └── tasks.md             # Phase 2 output (/speckit.tasks command - NOT created by /speckit.plan)
 ```
 
 ### Source Code (repository root)
-<!--
-  ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
-  for this feature. Delete unused options and expand the chosen structure with
-  real paths (e.g., apps/admin, packages/something). The delivered plan must
-  not include Option labels.
--->
 
 ```text
-# [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
-src/
-├── models/
-├── services/
-├── cli/
-└── lib/
+app/
+├── page.tsx
+├── layout.tsx
+├── globals.css
+└── components/          # Page-specific components if this project keeps them under app
 
-tests/
-├── contract/
-├── integration/
-└── unit/
-
-# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
-backend/
-├── src/
-│   ├── models/
-│   ├── services/
-│   └── api/
-└── tests/
-
-frontend/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   └── services/
-└── tests/
-
-# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
-api/
-└── [same as backend above]
-
-ios/ or android/
-└── [platform-specific structure: feature modules, UI flows, platform tests]
+components/              # Shared React components with no page-level orchestration
+lib/                     # Utilities, Quran plan data, and local storage helpers
+types/                   # TypeScript interfaces only
+public/                  # Static SVG or self-hosted fonts if needed
 ```
 
-**Structure Decision**: [Document the selected structure and reference the real
-directories captured above]
+**Structure Decision**: [Document the selected structure and reference the real directories above. Keep the app single-page unless the constitution is amended.]
 
 ## Complexity Tracking
 
 > **Fill ONLY if Constitution Check has violations that must be justified**
 
-| Violation | Why Needed | Simpler Alternative Rejected Because |
-|-----------|------------|-------------------------------------|
-| [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
-| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |
+| Violation | Why Needed | Simpler Alternative Rejected Because | Follow-up Back to Compliance |
+|-----------|------------|-------------------------------------|------------------------------|
+| [e.g., new external library] | [current need] | [why built-in/shadcn/Tailwind option is insufficient] | [how/when to remove or approve] |

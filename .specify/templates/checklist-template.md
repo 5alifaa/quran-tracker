@@ -15,6 +15,8 @@
   - Feature requirements from spec.md
   - Technical context from plan.md
   - Implementation details from tasks.md
+  - Constitution gates: mobile-first, Arabic RTL, spiritual tone, local-only privacy,
+    performance, accessibility, strict TypeScript, Tailwind utilities, and manual verification
   
   DO NOT keep these sample items in the generated checklist file.
   ============================================================================

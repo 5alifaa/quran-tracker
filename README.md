@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Quran 40-Day Khatma Tracker
 
-## Getting Started
+Mobile-first Arabic RTL Quran reading tracker for completing a khatma in 40 days.
 
-First, run the development server:
+## Principles
+
+- Mobile-first: design starts on phones, with 44px minimum touch targets.
+- Arabic-first: all UI text is Arabic, RTL-native, with Arabic numerals.
+- Spiritual tone: encouraging companion language, never guilt-based copy.
+- Zero backend MVP: local device storage only, no auth, database, API, analytics, or tracking.
+- Performance-first: single page, minimal dependencies, SVG graphics only, fast first paint.
+- Accessible: WCAG 2.1 AA expectations, semantic HTML, focus states, and screen reader support.
+
+## Development
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+pnpm build
+```
 
-## Learn More
+The app is configured for static export through `next.config.ts`. Keep this only while it preserves the single-page local-only behavior, Arabic font loading, and Vercel deployment compatibility.
 
-To learn more about Next.js, take a look at the following resources:
+## Manual Verification
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- iPhone Safari
+- Android Chrome
+- Desktop Chrome
+- Local storage persistence after close and reopen
+- RTL layout and Arabic numerals
+- Arabic font loading
+- Offline return after first successful load where browser cache permits
+- Keyboard access, visible focus states, labels, semantic HTML, and contrast
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deployment
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Deploy on Vercel. No environment variables are required for the MVP. If static export causes a deployment or font-loading issue, use the standard Vercel Next.js deployment while preserving the zero-backend app behavior.

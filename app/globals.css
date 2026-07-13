@@ -1,26 +1,116 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f5f0e6;
+  --foreground: #1e3a5f;
+  --cream: #f5f0e6;
+  --cream-deep: #eadfca;
+  --teal: #009b8b;
+  --teal-deep: #00796f;
+  --gold: #d4af37;
+  --gold-bright: #ffdd00;
+  --navy: #1e3a5f;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-cream: var(--cream);
+  --color-cream-deep: var(--cream-deep);
+  --color-teal: var(--teal);
+  --color-teal-deep: var(--teal-deep);
+  --color-gold: var(--gold);
+  --color-gold-bright: var(--gold-bright);
+  --color-navy: var(--navy);
+  --font-sans: var(--font-naskh), "Noto Naskh Arabic", Tahoma, Arial, sans-serif;
+  --font-serif: var(--font-amiri), Amiri, "Times New Roman", serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: var(--background);
 }
 
 body {
-  background: var(--background);
+  min-height: 100vh;
+  margin: 0;
+  background:
+    radial-gradient(circle at top right, rgba(212, 175, 55, 0.2), transparent 32rem),
+    linear-gradient(180deg, #f8f1df 0%, var(--background) 48%, #efe4cd 100%);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-naskh), "Noto Naskh Arabic", Tahoma, Arial, sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button:focus-visible,
+input:focus-visible,
+[role="button"]:focus-visible {
+  outline: 3px solid var(--gold-bright);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: rgba(0, 155, 139, 0.2);
+}
+
+.font-amiri {
+  font-family: var(--font-amiri), Amiri, "Times New Roman", serif;
+}
+
+.modal-fade-in {
+  animation: modalFadeIn 180ms ease-out;
+}
+
+.checkmark-bounce {
+  animation: checkmarkBounce 360ms ease-out;
+}
+
+.progress-fill {
+  transition: width 450ms ease-out;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes checkmarkBounce {
+  0% {
+    transform: scale(0.78);
+  }
+
+  70% {
+    transform: scale(1.08);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
+  }
 }
