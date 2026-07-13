@@ -1,0 +1,19 @@
+{
+  "name": "ختمة القرآن في ٤٠ يوم",
+  "short_name": "ختمة ٤٠",
+  "description": "رفيقك اليومي لختم القرآن في أربعين يوماً",
+  "dir": "rtl",
+  "lang": "ar",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f0e6",
+  "theme_color": "#1e3a5f",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "992x1056",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

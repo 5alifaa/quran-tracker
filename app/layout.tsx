@@ -19,6 +19,11 @@ const notoNaskh = Noto_Naskh_Arabic({
 export const metadata: Metadata = {
   title: "ختمة القرآن في ٤٠ يوم",
   description: "رفيقك اليومي لختم القرآن في أربعين يوماً",
+  manifest: "/manifest.json",
+  icons: {
+    icon: [{ url: "/icon.png", sizes: "992x1056", type: "image/png" }],
+    shortcut: [{ url: "/icon.png", sizes: "992x1056", type: "image/png" }],
+  },
 };
 
 export default function RootLayout({
