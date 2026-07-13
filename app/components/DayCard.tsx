@@ -1,5 +1,4 @@
 import type { KeyboardEvent } from "react";
-import { Button } from "@/app/components/ui/Button";
 import { Card } from "@/app/components/ui/Card";
 import { formatCompactRange, formatDayLabel, toArabicNumber, truncateSurahName } from "@/lib/format";
 import type { DayPlan } from "@/types";
@@ -7,26 +6,28 @@ import type { DayPlan } from "@/types";
 type DayCardProps = {
   day: DayPlan;
   isSuggested: boolean;
-  onOpen: (day: DayPlan) => void;
   onToggle: (day: DayPlan) => void;
 };
 
-export function DayCard({ day, isSuggested, onOpen, onToggle }: DayCardProps) {
+export function DayCard({ day, isSuggested, onToggle }: DayCardProps) {
   function handleKeyDown(event: KeyboardEvent<HTMLElement>) {
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
-      onOpen(day);
+      onToggle(day);
     }
   }
+
+  const toggleLabel = day.completed ? "اضغط لإلغاء الإنجاز" : "اضغط لتسجيل الإنجاز";
 
   if (isSuggested) {
     return (
       <Card
-        aria-label={`${formatDayLabel(day.id)} ${day.from.surah}`}
+        aria-checked={day.completed}
+        aria-label={`${formatDayLabel(day.id)} ${day.from.surah}. ${toggleLabel}`}
         className={`cursor-pointer overflow-hidden ${day.completed ? "opacity-75" : "ring-2 ring-gold"}`}
-        onClick={() => onOpen(day)}
+        onClick={() => onToggle(day)}
         onKeyDown={handleKeyDown}
-        role="button"
+        role="checkbox"
         tabIndex={0}
       >
         <div className="bg-teal px-4 py-3 text-cream">
@@ -38,16 +39,9 @@ export function DayCard({ day, isSuggested, onOpen, onToggle }: DayCardProps) {
             <h3 className="font-amiri text-2xl font-bold text-navy">{day.from.surah}</h3>
             <p className="text-sm font-semibold text-navy/70">الآيات: {formatCompactRange(day)}</p>
           </div>
-          <Button
-            className="w-full"
-            onClick={(event) => {
-              event.stopPropagation();
-              onToggle(day);
-            }}
-            variant={day.completed ? "secondary" : "primary"}
-          >
-            {day.completed ? <span className="checkmark-bounce">✓ تم الإنجاز</span> : "أنجزت"}
-          </Button>
+          <div className={`rounded-2xl px-4 py-3 text-center text-base font-bold ${day.completed ? "bg-gold text-navy" : "bg-teal text-cream"}`}>
+            {day.completed ? <span className="checkmark-bounce">✓ تم الإنجاز</span> : "اضغط للتسجيل"}
+          </div>
         </div>
       </Card>
     );
@@ -55,11 +49,12 @@ export function DayCard({ day, isSuggested, onOpen, onToggle }: DayCardProps) {
 
   return (
     <Card
-      aria-label={`${formatDayLabel(day.id)} ${day.from.surah}`}
+      aria-checked={day.completed}
+      aria-label={`${formatDayLabel(day.id)} ${day.from.surah}. ${toggleLabel}`}
       className={`cursor-pointer p-3 transition-transform hover:-translate-y-0.5 ${day.completed ? "opacity-70" : ""}`}
-      onClick={() => onOpen(day)}
+      onClick={() => onToggle(day)}
       onKeyDown={handleKeyDown}
-      role="button"
+      role="checkbox"
       tabIndex={0}
     >
       <div className="flex items-start justify-between gap-2">

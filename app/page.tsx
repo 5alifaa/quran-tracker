@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { CelebrationModal } from "@/app/components/CelebrationModal";
 import { DayCard } from "@/app/components/DayCard";
-import { DayDetailModal } from "@/app/components/DayDetailModal";
 import { EditNameModal } from "@/app/components/EditNameModal";
 import { Header } from "@/app/components/Header";
 import { IslamicBorder } from "@/app/components/IslamicBorder";
@@ -19,7 +18,6 @@ import type { AppState, DayPlan } from "@/types";
 export default function Home() {
   const [appState, setAppState] = useState<AppState | null>(null);
   const [isReady, setIsReady] = useState(false);
-  const [selectedDay, setSelectedDay] = useState<DayPlan | null>(null);
   const [isEditingName, setIsEditingName] = useState(false);
   const [isResetOpen, setIsResetOpen] = useState(false);
   const [isCelebrationOpen, setIsCelebrationOpen] = useState(false);
@@ -62,10 +60,6 @@ export default function Home() {
       return;
     }
 
-    if (day.completed && !window.confirm("هل تريد إلغاء إنجاز هذا اليوم؟")) {
-      return;
-    }
-
     const nextDays = appState.days.map((item) => {
       if (item.id !== day.id) {
         return item;
@@ -79,11 +73,9 @@ export default function Home() {
       };
     });
     const nextState = { ...appState, days: nextDays };
-    const nextSelectedDay = nextDays.find((item) => item.id === day.id) ?? null;
     const nextProgress = getKhatmaProgress(nextDays);
 
     persistState(nextState);
-    setSelectedDay(nextSelectedDay);
 
     if (!nextProgress.isComplete) {
       setCelebrationDismissed(false);
@@ -97,7 +89,6 @@ export default function Home() {
   function handleReset() {
     resetAppState();
     setAppState(null);
-    setSelectedDay(null);
     setIsResetOpen(false);
     setIsCelebrationOpen(false);
     setCelebrationDismissed(false);
@@ -123,12 +114,12 @@ export default function Home() {
                   className="min-h-14 text-lg"
                   onClick={() => {
                     if (suggestedDay) {
-                      setSelectedDay(suggestedDay);
+                      handleToggleDay(suggestedDay);
                     }
                   }}
                   variant="secondary"
                 >
-                  {formatTodayShortcut(progress.suggestedCurrentDayId)}
+                  {suggestedDay?.completed ? "تراجع عن ورد اليوم" : formatTodayShortcut(progress.suggestedCurrentDayId)}
                 </Button>
                 <Button onClick={() => setIsResetOpen(true)} variant="ghost">
                   ابدأ من جديد
@@ -142,7 +133,6 @@ export default function Home() {
                   day={day}
                   isSuggested={day.id === progress.suggestedCurrentDayId}
                   key={day.id}
-                  onOpen={setSelectedDay}
                   onToggle={handleToggleDay}
                 />
               ))}
@@ -163,7 +153,6 @@ export default function Home() {
 
       <OnboardingModal onSubmit={handleStart} open={!appState} />
       {isEditingName ? <EditNameModal currentName={appState?.readerName ?? ""} onClose={() => setIsEditingName(false)} onSave={handleSaveName} open /> : null}
-      <DayDetailModal day={selectedDay} onClose={() => setSelectedDay(null)} onToggle={handleToggleDay} />
       <ResetConfirmModal onCancel={() => setIsResetOpen(false)} onConfirm={handleReset} open={isResetOpen} />
       <CelebrationModal
         onClose={() => {
