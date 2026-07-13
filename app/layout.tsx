@@ -21,8 +21,13 @@ export const metadata: Metadata = {
   description: "رفيقك اليومي لختم القرآن في أربعين يوماً",
   manifest: "/manifest.json",
   icons: {
-    icon: [{ url: "/icon.png", sizes: "992x1056", type: "image/png" }],
-    shortcut: [{ url: "/icon.png", sizes: "992x1056", type: "image/png" }],
+    icon: [
+      { url: "/favicon.ico", sizes: "16x16 32x32 48x48", type: "image/x-icon" },
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    shortcut: [{ url: "/favicon.ico", type: "image/x-icon" }],
+    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
   },
 };
 
