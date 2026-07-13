@@ -59,7 +59,7 @@ Derived state for display only; it is not stored separately.
 - AppState contains one ReaderProfile-like reader name and hidden start date.
 - AppState contains exactly 40 DayPlan records derived from the fixed ReadingPlanDataset.
 - KhatmaProgress is derived from AppState.days each time state changes.
-- The detail modal reads one DayPlan at a time and writes only that day completion state.
+- Day cards read one DayPlan at a time and write only that day completion state through direct toggles.
 
 ## State Transitions
 
@@ -79,11 +79,10 @@ Derived state for display only; it is not stored separately.
 
 ### Toggle Day Complete
 
-1. Reader opens any day card or uses a card action.
-2. If incomplete, tapping `أنجزت` sets completed true and stores dateCompleted.
-3. If complete, tapping completion again asks `هل تريد إلغاء إنجاز هذا اليوم؟`.
-4. Confirming un-completion sets completed false and removes dateCompleted.
-5. KhatmaProgress recalculates immediately.
+1. Reader taps any day card or uses the suggested-day shortcut.
+2. If incomplete, the toggle sets completed true and stores dateCompleted.
+3. If complete, the toggle sets completed false and removes dateCompleted immediately.
+4. KhatmaProgress recalculates immediately.
 
 ### Reset
 
@@ -106,4 +105,4 @@ Derived state for display only; it is not stored separately.
 - Completion can be toggled for any day regardless of other day states.
 - Corrupt, missing, or incompatible stored state falls back to fresh onboarding.
 - Saved states do not expire, including states older than 100 days.
-- Compact-card surah labels truncate after 15 characters with an ellipsis; detail modal always shows full names.
+- Compact cards show the day label separately and the full reading range below on one no-wrap line without repeating the surah name in the day label.

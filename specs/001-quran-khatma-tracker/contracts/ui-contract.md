@@ -10,7 +10,7 @@ This feature has no backend, public API, or external service contract. The contr
 - Primary touch targets are at least 44px.
 - Controls are keyboard reachable and have visible focus states.
 - Graphics are SVG only.
-- Animations are limited to modal fade-in, checkmark bounce, and progress bar fill.
+- Animations are limited to modal fade-in for onboarding/reset/celebration flows, checkmark bounce, and progress bar fill.
 
 ## Onboarding Modal
 
@@ -68,39 +68,29 @@ This feature has no backend, public API, or external service contract. The contr
 
 - Teal header.
 - Day number.
-- `ورد اليوم` and `الآيات` labels.
-- Surah name and ayah range.
-- `أنجزت` action if incomplete or checkmark if complete.
+- `ورد اليوم` label.
+- Full reading range.
+- Quick registration cue if incomplete or checkmark if complete.
 - Gold highlight treatment.
 
 ### Compact Variant
 
-- Day number and surah name.
-- Ayah range.
+- Day label on its own line.
+- Full-width no-wrap ayah range below the day label, formatted like `الأعرَاف ١ ← الأعرَاف ١٤١` or `الصَّافَات ١٤٥ ← الزُّمَر ٧٥`.
 - Status indicator.
-- Surah names longer than 15 characters truncate with ellipsis.
+- No redundant surah name in the day label.
 
 ### Interaction
 
-- Tapping any card opens the detail modal for that day.
+- Tapping any card toggles completion directly.
+- Cards expose checkbox-like state with `aria-checked` and keyboard toggle support.
 - Completion is not order-enforced.
-
-## Day Detail Modal
-
-### Required Content
-
-- Day number.
-- Full surah names.
-- Ayah range formatted as `السورة <اسم السورة> الآية <رقم الآية> ← السورة <اسم السورة> الآية <رقم الآية>`.
-- Primary completion action: `✓ أَنْجَزْت`.
-- Close action: `إغلاق`.
 
 ### Toggle Behavior
 
-- Incomplete day: completion action marks it complete immediately.
-- Completed day: completion action asks `هل تريد إلغاء إنجاز هذا اليوم؟`.
-- Confirming un-completion toggles the day incomplete and decreases progress.
-- Closing or outside click does not change state.
+- Incomplete day: tapping the card marks it complete immediately.
+- Completed day: tapping the card toggles it incomplete immediately, without a confirmation dialog.
+- Progress, suggested-current day, and persisted local state update immediately after each toggle.
 
 ## Reset Confirmation
 

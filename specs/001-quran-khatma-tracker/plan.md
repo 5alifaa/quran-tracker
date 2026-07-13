@@ -59,7 +59,9 @@ app/
 └── components/
     ├── OnboardingModal.tsx
     ├── DayCard.tsx
-    ├── DayDetailModal.tsx
+    ├── EditNameModal.tsx
+    ├── ResetConfirmModal.tsx
+    ├── CelebrationModal.tsx
     ├── ProgressBar.tsx
     ├── IslamicBorder.tsx
     └── Header.tsx

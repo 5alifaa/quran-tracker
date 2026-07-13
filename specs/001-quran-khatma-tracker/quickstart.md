@@ -50,16 +50,15 @@ pnpm build
 - Confirm exactly 40 cards are visible.
 - Confirm progress starts at 0% for fresh state.
 - Confirm the suggested current day is highlighted.
-- Confirm the `اليوم: <رقم اليوم>` shortcut opens the detail modal.
+- Confirm the `اليوم: <رقم اليوم>` shortcut toggles the suggested current day directly.
 
-### Day Detail And Completion
+### Quick Toggle Completion
 
-- Open several day cards, including a non-sequential day.
-- Confirm full surah and ayah range display.
-- Mark a day complete and confirm progress updates within 1 second.
-- Mark a completed day again and confirm `هل تريد إلغاء إنجاز هذا اليوم؟` appears.
+- Review several day cards, including a non-sequential day.
+- Confirm each compact card shows the day label on its own line and the range below it as one no-wrap full-width line, for example `الأعرَاف ١ ← الأعرَاف ١٤١`.
+- Tap a day card and confirm progress updates within 1 second.
+- Tap a completed day again and confirm it toggles incomplete without a confirmation dialog.
 - Confirm un-completion decreases progress.
-- Close the modal with `إغلاق` and outside click; confirm no unintended state changes.
 
 ### Reset And Completion
 
@@ -75,7 +74,7 @@ pnpm build
 - Verify desktop layout has 5-7 columns.
 - Verify no horizontal scrolling in the main grid.
 - Navigate primary flows with keyboard only.
-- Confirm visible focus states and accessible labels for inputs, buttons, dialogs, and progress.
+- Confirm visible focus states and accessible labels for inputs, buttons, checkbox-like day cards, dialogs, and progress.
 - Check contrast against WCAG 2.1 AA expectations.
 
 ### Persistence And Offline
@@ -88,7 +87,7 @@ pnpm build
 
 - Verify first paint is under 3 seconds on a mobile 3G-class profile.
 - Confirm fonts use swap behavior with no invisible text.
-- Confirm no user-visible layout shift in dashboard and modal views.
+- Confirm no user-visible layout shift in dashboard and remaining modal views.
 - Confirm Amiri is used for headings and Noto Naskh Arabic or system fallback for body text.
 
 ## Deployment Check

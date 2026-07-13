@@ -76,17 +76,17 @@
 
 ## Phase 4: User Story 2 - Follow the 40-Day Reading Plan (Priority: P1)
 
-**Goal**: Readers can view all 40 ordered portions, identify the suggested current day, use the today shortcut, and open detail for any day.
+**Goal**: Readers can view all 40 ordered portions, identify the suggested current day, and use the today shortcut as a direct toggle.
 
-**Independent Test**: With a reader name saved, load the dashboard and confirm exactly 40 cards render in order, the suggested current day is highlighted, responsive columns work, Islamic borders render, and `اليوم: <رقم اليوم>` opens the suggested day detail modal.
+**Independent Test**: With a reader name saved, load the dashboard and confirm exactly 40 cards render in order, the suggested current day is highlighted, responsive columns work, Islamic borders render, and `اليوم: <رقم اليوم>` toggles the suggested day directly.
 
 ### Implementation for User Story 2
 
 - [X] T020 [P] [US2] Create top and bottom SVG Islamic geometric border component in `app/components/IslamicBorder.tsx`
-- [X] T021 [P] [US2] Create responsive day card variants with truncation and status indicators in `app/components/DayCard.tsx`
-- [X] T022 [P] [US2] Create read-focused day detail modal shell with full surah names and ayah range display in `app/components/DayDetailModal.tsx`
+- [X] T021 [P] [US2] Create responsive day card variants with separated day labels, full-width no-wrap ranges, and status indicators in `app/components/DayCard.tsx`
+- [X] T022 [P] [US2] Remove day detail modal in favor of direct card toggles in `app/components/DayCard.tsx` and `app/page.tsx`
 - [X] T023 [US2] Render the Islamic borders, 40-card responsive grid, suggested-current highlight, and today shortcut in `app/page.tsx`
-- [ ] T024 [US2] Verify all 40 plan entries, responsive grid counts, long-name truncation, full modal names, RTL layout, and no horizontal scrolling using `specs/001-quran-khatma-tracker/quickstart.md`
+- [ ] T024 [US2] Verify all 40 plan entries, responsive grid counts, no-wrap range display, RTL layout, and no horizontal scrolling using `specs/001-quran-khatma-tracker/quickstart.md`
 
 **Checkpoint**: User Story 2 is functional and manually testable independently after foundational state exists.
 
@@ -94,17 +94,17 @@
 
 ## Phase 5: User Story 3 - Mark Daily Reading Complete (Priority: P1)
 
-**Goal**: Readers can toggle any day complete or incomplete in any order, with immediate progress impact and un-complete confirmation.
+**Goal**: Readers can toggle any day complete or incomplete in any order, with immediate progress impact and no confirmation friction.
 
-**Independent Test**: Select any non-sequential day, mark it complete, confirm the card/checkmark/progress update, tap completion again, confirm `هل تريد إلغاء إنجاز هذا اليوم؟`, un-complete the day, reload, and confirm state persists.
+**Independent Test**: Select any non-sequential day, mark it complete, confirm the card/checkmark/progress update, tap it again, confirm it becomes incomplete immediately, reload, and confirm state persists.
 
 ### Implementation for User Story 3
 
-- [X] T025 [P] [US3] Add complete and completed-state action UI to `app/components/DayCard.tsx`
-- [X] T026 [P] [US3] Add complete, un-complete confirmation, and close/outside-click behavior to `app/components/DayDetailModal.tsx`
+- [X] T025 [P] [US3] Add complete and completed-state direct toggle UI to `app/components/DayCard.tsx`
+- [X] T026 [P] [US3] Add accessible checkbox-like direct toggle behavior to `app/components/DayCard.tsx`
 - [X] T027 [P] [US3] Create progress bar with Arabic percentage badge and accessible labelling in `app/components/ProgressBar.tsx`
 - [X] T028 [US3] Wire any-order completion toggles, dateCompleted updates, progress recalculation, and persistence in `app/page.tsx`
-- [ ] T029 [US3] Verify any-order toggle, un-complete confirmation, progress update under 1 second, persistence after reload, and no order enforcement using `specs/001-quran-khatma-tracker/quickstart.md`
+- [ ] T029 [US3] Verify any-order quick toggle, immediate un-complete, progress update under 1 second, persistence after reload, and no order enforcement using `specs/001-quran-khatma-tracker/quickstart.md`
 
 **Checkpoint**: User Story 3 is functional and manually testable independently with persisted completion state.
 
@@ -136,10 +136,10 @@
 
 ### Implementation for User Story 5
 
-- [X] T035 [P] [US5] Audit and normalize all Arabic UI copy and Arabic numeral output in `app/page.tsx`, `app/components/Header.tsx`, `app/components/OnboardingModal.tsx`, `app/components/EditNameModal.tsx`, `app/components/DayCard.tsx`, `app/components/DayDetailModal.tsx`, `app/components/ProgressBar.tsx`, `app/components/ResetConfirmModal.tsx`, and `app/components/CelebrationModal.tsx`
-- [X] T036 [P] [US5] Apply final cream, teal, gold, navy, and yellow visual styling with Tailwind utilities in `app/globals.css`, `app/components/Header.tsx`, `app/components/OnboardingModal.tsx`, `app/components/EditNameModal.tsx`, `app/components/DayCard.tsx`, `app/components/DayDetailModal.tsx`, `app/components/ProgressBar.tsx`, `app/components/ResetConfirmModal.tsx`, and `app/components/CelebrationModal.tsx`
-- [X] T037 [P] [US5] Add minimal modal fade-in, checkmark bounce, and progress fill motion with reduced-motion support in `app/globals.css`, `app/components/DayCard.tsx`, `app/components/DayDetailModal.tsx`, and `app/components/ProgressBar.tsx`
-- [ ] T038 [US5] Verify screen reader labels, semantic landmarks, keyboard flow, visible focus, color contrast, Arabic-only text, and no guilt-based copy in `app/page.tsx`, `app/components/Header.tsx`, `app/components/OnboardingModal.tsx`, `app/components/EditNameModal.tsx`, `app/components/DayCard.tsx`, `app/components/DayDetailModal.tsx`, `app/components/ProgressBar.tsx`, `app/components/ResetConfirmModal.tsx`, and `app/components/CelebrationModal.tsx`
+- [X] T035 [P] [US5] Audit and normalize all Arabic UI copy and Arabic numeral output in `app/page.tsx`, `app/components/Header.tsx`, `app/components/OnboardingModal.tsx`, `app/components/EditNameModal.tsx`, `app/components/DayCard.tsx`, `app/components/ProgressBar.tsx`, `app/components/ResetConfirmModal.tsx`, and `app/components/CelebrationModal.tsx`
+- [X] T036 [P] [US5] Apply final cream, teal, gold, navy, and yellow visual styling with Tailwind utilities in `app/globals.css`, `app/components/Header.tsx`, `app/components/OnboardingModal.tsx`, `app/components/EditNameModal.tsx`, `app/components/DayCard.tsx`, `app/components/ProgressBar.tsx`, `app/components/ResetConfirmModal.tsx`, and `app/components/CelebrationModal.tsx`
+- [X] T037 [P] [US5] Add minimal modal fade-in, checkmark bounce, and progress fill motion with reduced-motion support in `app/globals.css`, `app/components/DayCard.tsx`, and `app/components/ProgressBar.tsx`
+- [ ] T038 [US5] Verify screen reader labels, semantic landmarks, keyboard flow, visible focus, color contrast, Arabic-only text, and no guilt-based copy in `app/page.tsx`, `app/components/Header.tsx`, `app/components/OnboardingModal.tsx`, `app/components/EditNameModal.tsx`, `app/components/DayCard.tsx`, `app/components/ProgressBar.tsx`, `app/components/ResetConfirmModal.tsx`, and `app/components/CelebrationModal.tsx`
 
 **Checkpoint**: User Story 5 polish and accessibility pass manual review without changing feature scope.
 
@@ -149,14 +149,14 @@
 
 **Purpose**: Cross-cutting verification required before release.
 
-- [X] T039 [P] Run `pnpm build` and resolve build failures in `package.json`, `next.config.ts`, `app/page.tsx`, `app/layout.tsx`, `app/globals.css`, `types/index.ts`, `lib/data.ts`, `lib/format.ts`, `lib/storage.ts`, `lib/progress.ts`, `app/components/Header.tsx`, `app/components/OnboardingModal.tsx`, `app/components/EditNameModal.tsx`, `app/components/DayCard.tsx`, `app/components/DayDetailModal.tsx`, `app/components/ProgressBar.tsx`, `app/components/ResetConfirmModal.tsx`, and `app/components/CelebrationModal.tsx`
+- [X] T039 [P] Run `pnpm build` and resolve build failures in `package.json`, `next.config.ts`, `app/page.tsx`, `app/layout.tsx`, `app/globals.css`, `types/index.ts`, `lib/data.ts`, `lib/format.ts`, `lib/storage.ts`, `lib/progress.ts`, `app/components/Header.tsx`, `app/components/OnboardingModal.tsx`, `app/components/EditNameModal.tsx`, `app/components/DayCard.tsx`, `app/components/ProgressBar.tsx`, `app/components/ResetConfirmModal.tsx`, and `app/components/CelebrationModal.tsx`
 - [ ] T040 [P] Manually verify iPhone Safari behavior using `specs/001-quran-khatma-tracker/quickstart.md`
 - [ ] T041 [P] Manually verify Android Chrome behavior using `specs/001-quran-khatma-tracker/quickstart.md`
 - [ ] T042 [P] Manually verify Desktop Chrome behavior using `specs/001-quran-khatma-tracker/quickstart.md`
 - [X] T043 Verify localStorage persistence, corrupt-storage fallback, cleared-data onboarding, and 100+ day old saved state behavior in `lib/storage.ts` and `app/page.tsx`
 - [X] T044 Verify offline return after first successful load and document any browser-cache limitation in `specs/001-quran-khatma-tracker/quickstart.md`
 - [ ] T045 Verify first paint under 3 seconds on a mobile 3G-class profile and no visible font-loading layout shift in `app/layout.tsx` and `app/globals.css`
-- [X] T046 Verify no backend, API calls, analytics, tracking, dark mode, image assets, social sharing, audio, tafsir, notes, or calendar code exists in `package.json`, `next.config.ts`, `app/page.tsx`, `app/layout.tsx`, `app/globals.css`, `types/index.ts`, `lib/data.ts`, `lib/format.ts`, `lib/storage.ts`, `lib/progress.ts`, `app/components/Header.tsx`, `app/components/OnboardingModal.tsx`, `app/components/EditNameModal.tsx`, `app/components/DayCard.tsx`, `app/components/DayDetailModal.tsx`, `app/components/ProgressBar.tsx`, `app/components/ResetConfirmModal.tsx`, and `app/components/CelebrationModal.tsx`
+- [X] T046 Verify no backend, API calls, analytics, tracking, dark mode, image assets, social sharing, audio, tafsir, notes, or calendar code exists in `package.json`, `next.config.ts`, `app/page.tsx`, `app/layout.tsx`, `app/globals.css`, `types/index.ts`, `lib/data.ts`, `lib/format.ts`, `lib/storage.ts`, `lib/progress.ts`, `app/components/Header.tsx`, `app/components/OnboardingModal.tsx`, `app/components/EditNameModal.tsx`, `app/components/DayCard.tsx`, `app/components/ProgressBar.tsx`, `app/components/ResetConfirmModal.tsx`, and `app/components/CelebrationModal.tsx`
 - [X] T047 Update deployment notes for Vercel and static export compatibility in `README.md` and `specs/001-quran-khatma-tracker/quickstart.md`
 
 ---
@@ -169,7 +169,7 @@
 - **Foundational (Phase 2)**: Depends on Setup completion; blocks all user stories.
 - **US1 Start a Personal Khatma (Phase 3)**: Depends on Foundational; MVP entry point.
 - **US2 Follow the 40-Day Reading Plan (Phase 4)**: Depends on Foundational and benefits from US1 page shell; can be developed after US1 wiring exists.
-- **US3 Mark Daily Reading Complete (Phase 5)**: Depends on US2 day cards/detail modal and foundational storage/progress helpers.
+- **US3 Mark Daily Reading Complete (Phase 5)**: Depends on US2 day cards and foundational storage/progress helpers.
 - **US4 Understand Progress and Restart (Phase 6)**: Depends on US3 completion/progress state.
 - **US5 Warm Arabic Interface (Phase 7)**: Depends on user-facing components from US1-US4.
 - **Polish (Phase 8)**: Depends on all selected user stories.
@@ -178,7 +178,7 @@
 
 - **US1 (P1)**: Independent after Foundational; delivers personalized app entry.
 - **US2 (P1)**: Independent after Foundational; needs page shell and fixed reading data.
-- **US3 (P1)**: Depends on US2 components for card/detail interactions.
+- **US3 (P1)**: Depends on US2 components for direct card interactions.
 - **US4 (P2)**: Depends on US3 progress state and completion toggles.
 - **US5 (P2)**: Cross-cuts all visible components and should run after core flows exist.
 
@@ -214,14 +214,14 @@ Task: T017 Create Header in app/components/Header.tsx
 ```text
 Task: T020 Create IslamicBorder in app/components/IslamicBorder.tsx
 Task: T021 Create DayCard in app/components/DayCard.tsx
-Task: T022 Create DayDetailModal shell in app/components/DayDetailModal.tsx
+Task: T022 Remove detail modal path and keep card interactions direct
 ```
 
 ## Parallel Example: User Story 3
 
 ```text
 Task: T025 Add completion action UI in app/components/DayCard.tsx
-Task: T026 Add completion behavior in app/components/DayDetailModal.tsx
+Task: T026 Add direct checkbox-like completion behavior in app/components/DayCard.tsx
 Task: T027 Create ProgressBar in app/components/ProgressBar.tsx
 ```
 
