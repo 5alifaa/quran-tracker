@@ -131,7 +131,6 @@ export default function Home() {
               {appState.days.map((day) => (
                 <DayCard
                   day={day}
-                  isSuggested={day.id === progress.suggestedCurrentDayId}
                   key={day.id}
                   onToggle={handleToggleDay}
                 />

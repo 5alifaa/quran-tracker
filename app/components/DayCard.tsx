@@ -5,11 +5,10 @@ import type { DayPlan } from "@/types";
 
 type DayCardProps = {
   day: DayPlan;
-  isSuggested: boolean;
   onToggle: (day: DayPlan) => void;
 };
 
-export function DayCard({ day, isSuggested, onToggle }: DayCardProps) {
+export function DayCard({ day, onToggle }: DayCardProps) {
   function handleKeyDown(event: KeyboardEvent<HTMLElement>) {
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
@@ -18,33 +17,6 @@ export function DayCard({ day, isSuggested, onToggle }: DayCardProps) {
   }
 
   const toggleLabel = day.completed ? "اضغط لإلغاء الإنجاز" : "اضغط لتسجيل الإنجاز";
-
-  if (isSuggested) {
-    return (
-      <Card
-        aria-checked={day.completed}
-        aria-label={`${formatDayLabel(day.id)} ${day.from.surah}. ${toggleLabel}`}
-        className={`cursor-pointer overflow-hidden ${day.completed ? "opacity-75" : "ring-2 ring-gold"}`}
-        onClick={() => onToggle(day)}
-        onKeyDown={handleKeyDown}
-        role="checkbox"
-        tabIndex={0}
-      >
-        <div className="bg-teal px-4 py-3 text-cream">
-          <p className="font-amiri text-3xl font-bold">اليوم {toArabicNumber(day.id)}</p>
-        </div>
-        <div className="space-y-3 p-4 text-right">
-          <div>
-            <p className="text-sm font-bold text-gold">ورد اليوم</p>
-            <p className="text-sm font-semibold leading-6 text-navy/70">{formatCompactRange(day)}</p>
-          </div>
-          <div className={`rounded-2xl px-4 py-3 text-center text-base font-bold ${day.completed ? "bg-gold text-navy" : "bg-teal text-cream"}`}>
-            {day.completed ? <span className="checkmark-bounce">✓ تم الإنجاز</span> : "اضغط للتسجيل"}
-          </div>
-        </div>
-      </Card>
-    );
-  }
 
   return (
     <Card
